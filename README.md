@@ -89,7 +89,8 @@ You should see status as `SUCCEEDED`, if not please click on `Execution Details`
 Now it's for create some standard deployment with Jenkins
 
 - Create a Jenkins Stage
-   ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
+   
+  ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
 
 - Add Automated triggers as Jenkins
   ![Add Automated triggers](images/spinnaker-pipeline2-jenkins.png)
@@ -99,7 +100,7 @@ Now it's for create some standard deployment with Jenkins
 
 You can add multiple stage to each pipeline and start manual execution.
 
-It's to explore spinnaker UI, recommended to explore all the componenets from UI and get an idea
+It's time to explore spinnaker UI, recommended to explore all the componenets from UI and get an idea
 
 ## Some Useful Links
 
