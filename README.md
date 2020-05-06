@@ -25,7 +25,9 @@ bash spinnaker.sh
 
 ## Jenkins Setup
 
-- While script is running, It's recommend to setup login credentails of Jenkins server as we're using CI as Jenkins server. 
+Above script will take care of Jenkins Server installation, so just finish the below steps to complete the spinnaker setup. 
+
+- While script is running, It's recommend to setup login credentails of Jenkins server as we're using CI as Jenkins server. Access your jenkins server with `http://nodeIP:5656`
 
 - After basic setup, please enable API token with help `'https://stackoverflow.com/questions/45466090/how-to-get-the-api-token-for-jenkins`, and provide inputs to above script. 
 
