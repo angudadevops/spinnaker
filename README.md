@@ -63,17 +63,20 @@ Once you're able to access your spinnaker server with localhost:9000, then follo
 
 ### Simple Deployment from Spinnaker
 
-- ![First create a project](images/spinnaker-project.png)
+- Create a Project 
+  ![First create a project](images/spinnaker-project.png)
 
-- Click the actions button 
-  - ![Create Application](images/spinnaker-application.png)
+- Click the actions button and Create Application
+  ![Create Application](images/spinnaker-application.png)
 
-- Select application 
-  - ![Create first pipeline](images/spinnaker-pipeline1.png)
+- Select application and Create First Pipeline
+  ![Create first pipeline](images/spinnaker-pipeline1.png)
 
-- ![Create simple stage](images/spinnaker-pipeline1-stage.png) and save changes
+- Create a Simple stage and save changes
+  ![Create simple stage](images/spinnaker-pipeline1-stage.png)
 
-- ![Start Deployment](images/spinnaker-pipeline1-execution.png)
+- Start Deployment from Spinnaker
+  ![Start Deployment](images/spinnaker-pipeline1-execution.png)
 
 You should see status as `SUCCEEDED`, if not please click on `Execution Details`. Verify from node, whether nginx deployment triggered or not. 
 
@@ -83,11 +86,14 @@ You should see status as `SUCCEEDED`, if not please click on `Execution Details`
 
 Now it's for create some standard deployment with Jenkins
 
-- ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
+- Create a Jenkins Stage
+  ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
 
-- ![Add Automated triggers](images/spinnaker-pipeline2-jenkins.png)
+- Add Automated triggers as Jenkins
+  ![Add Automated triggers](images/spinnaker-pipeline2-jenkins.png)
 
-- ![Add Jenkins Stage](images/spinnaker-pipeline2-stage.png)
+- Add Jenkins Stage
+  ![Add Jenkins Stage](images/spinnaker-pipeline2-stage.png)
 
 You can add multiple stage to each pipeline and start manual execution.
 
