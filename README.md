@@ -89,7 +89,7 @@ You should see status as `SUCCEEDED`, if not please click on `Execution Details`
 Now it's for create some standard deployment with Jenkins
 
 - Create a Jenkins Stage
-  ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
+   ![Create Jenkins Stage](images/spinnaker-pipeline1.png)
 
 - Add Automated triggers as Jenkins
   ![Add Automated triggers](images/spinnaker-pipeline2-jenkins.png)
