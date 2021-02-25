@@ -7,7 +7,7 @@ if [[ $sp == "y" ]]; then
 	sudo apt clean
  	sudo apt update
 	sudo apt upgrade -y
-	sudo apt install openjdk-8-jdk -y
+	sudo apt install openjdk-11-jdk -y
 	sudo apt install git -y
 	wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 	sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
@@ -24,9 +24,9 @@ if [[ $sp == "y" ]]; then
 	curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
  	sudo bash InstallHalyard.sh
  	echo "*********Installing kubernetes***********"
- 	git clone https://github.com/angudadevops/singlenode_kubernetes.git
- 	cd singlenode_kubernetes/ && sudo bash install.sh
- 	sleep 10
+ 	#git clone https://github.com/angudadevops/singlenode_kubernetes.git
+ 	#cd singlenode_kubernetes/ && sudo bash install.sh
+ 	#sleep 10
  	sudo usermod -a -G docker jenkins
 	sudo service jenkins restart
  	echo "*********Configuring Halyard***********"

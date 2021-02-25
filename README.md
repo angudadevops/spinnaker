@@ -3,6 +3,12 @@
 
 This reposiotry helps you setup spinnaker server
 
+```
+kubectl create secret generic spinnaker-aws --from-literal="aws_access_key_id=<AWS ACCESS Key>" --from-literal="aws_secret_access_key=<AWS SECRET KEY>"
+kubectl apply -f jenkins/jenkins.yaml
+kubectl apply -f spinnaker.yaml
+```
+
 ## Prerequisistes
 - 4vCPU's
 - 8GB RAM(minimum)
@@ -107,6 +113,174 @@ Now it's for create some standard deployment with Jenkins
   ![Add Jenkins Stage](images/spinnaker-pipeline2-stage.png)
 
 You can add multiple stage to each pipeline and start manual execution.
+
+You can create an application and add below pipeline code, that will run jenkins job and trigger deploymnt on kubernetes cluster with your approval
+```
+{
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "failPipeline": true,
+      "judgmentInputs": [
+        {
+          "value": "Approve"
+        }
+      ],
+      "name": "Manual Judgment",
+      "notifications": [],
+      "refId": "3",
+      "requisiteStageRefIds": [],
+      "type": "manualJudgment"
+    },
+    {
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "HelloBuild",
+      "master": "my-jenkins-master",
+      "name": "Jenkins",
+      "parameters": {},
+      "refId": "4",
+      "requisiteStageRefIds": [
+        "3"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "failPipeline": true,
+      "judgmentInputs": [
+        {
+          "value": "latest"
+        }
+      ],
+      "name": "Manual Judgment",
+      "notifications": [],
+      "refId": "6",
+      "requisiteStageRefIds": [],
+      "type": "manualJudgment"
+    },
+    {
+      "account": "my-k8s-account",
+      "cloudProvider": "kubernetes",
+      "manifests": [
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "labels": {
+              "app": "nginx"
+            },
+            "name": "nginx-deployment"
+          },
+          "spec": {
+            "replicas": 1,
+            "selector": {
+              "matchLabels": {
+                "app": "nginx"
+              }
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "nginx"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "image": "nginx:1.14.2",
+                    "name": "nginx",
+                    "ports": [
+                      {
+                        "containerPort": 80
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "moniker": {
+        "app": "hellobuild"
+      },
+      "name": "Deploy (Manifest)",
+      "refId": "9",
+      "requisiteStageRefIds": [
+        "6"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "text",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "account": "my-k8s-account",
+      "app": "hellobuild",
+      "cloudProvider": "kubernetes",
+      "location": "spinnaker",
+      "manifestName": "deployment nginx-deployment",
+      "mode": "static",
+      "name": "Patch (Manifest)",
+      "options": {
+        "mergeStrategy": "strategic",
+        "record": true
+      },
+      "patchBody": [
+        {
+          "spec": {
+            "replicas": 2,
+            "selector": {
+              "matchLabels": {
+                "app": "nginx"
+              }
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "nginx"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "image": "nginx",
+                    "name": "nginx"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "refId": "10",
+      "requisiteStageRefIds": [
+        "9"
+      ],
+      "source": "text",
+      "type": "patchManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "enabled": false,
+      "job": "HelloBuild",
+      "master": "my-jenkins-master",
+      "type": "jenkins"
+    }
+  ],
+  "updateTs": "1614223619000"
+}
+```
 
 It's time to explore spinnaker UI, recommended to explore all the componenets from UI and get an idea
 

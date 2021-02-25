@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  labels:
+    app: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: anguda/jenkins:automatic-setup
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: JENKINS_ADMIN_ID
+            value: admin
+          - name: JENKINS_ADMIN_PASSWORD
+            value: admin
+          - name: JENKINS_URL
+            value: "http://$(HOST_IP):31050"
+        ports:
+        - containerPort: 8080
+          name: master
+        - containerPort: 50000
+          name: slave
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+spec:
+  selector:
+    app: jenkins
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 31050
+      name: master
+    - port: 50000
+      targetPort: 50000
+      nodePort: 31051
+      name: slave 
+  type: NodePort
