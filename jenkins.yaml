@@ -28,12 +28,6 @@ spec:
             value: admin
           - name: JENKINS_URL
             value: "http://$(HOST_IP):31050"
-          - name: AWS_ACCESS_KEY_ID
-            value: AKIA4EGCAX2PNKAV654S
-          - name: AWS_SECRET_ACCESS_KEY
-            value: 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
-          - name: AWS_DEFAULT_REGION
-            value: us-west-2
         ports:
         - containerPort: 8080
           name: master
