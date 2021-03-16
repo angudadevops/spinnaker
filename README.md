@@ -6,7 +6,7 @@ This reposiotry helps you setup spinnaker server
 ## Spinnaker Setup on Kubernetes
 ```
 kubectl create secret generic spinnaker-aws --from-literal="aws_access_key_id=<AWS ACCESS Key>" --from-literal="aws_secret_access_key=<AWS SECRET KEY>"
-kubectl apply -f jenkins/jenkins.yaml
+kubectl apply -f jenkins.yaml
 kubectl apply -f spinnaker.yaml
 ```
 Access the Spinnaker UI with below URL, replace the hostIP with your system IP
