@@ -1,5 +1,4 @@
-# Spinnaker setup [![HitCount](http://hits.dwyl.com/angudadevops/spinnaker.svg)](http://hits.dwyl.com/angudadevops/spinnaker)
-
+# Spinnaker setup 
 
 This reposiotry helps you setup spinnaker server
 
